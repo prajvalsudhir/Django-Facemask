@@ -7,7 +7,7 @@ from .face_model import predict
 from .forms import input_form
 from .models import face_photos,predicted_photos
 
-from .face_model import predict
+from .face_model import predict,predict_v2
 
 # Create your views here.
 
@@ -23,8 +23,8 @@ def user_input(requests):
             # face_photo.save()
             input_path = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\media\\images_input\\' + str(form.cleaned_data['img_input'])
             output_path = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\media\\images_output\\'  + str(form.cleaned_data['img_input'])
-            pro_img = predict(input_path,output_path,form)
-            return render(requests,'face_app/result.html',{'processed_img':pro_img})
+            pro_img,count,with_mask,without_mask = predict_v2(input_path,output_path,form)
+            return render(requests,'face_app/result.html',{'processed_img':pro_img , 'count':count,'with_mask':with_mask,'without_mask':without_mask})
             # return HttpResponse('image uploaded')
     else:
         form = input_form()
