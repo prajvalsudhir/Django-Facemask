@@ -26,7 +26,7 @@ SECRET_KEY = '7oq2i^gic+48xdeqzk4v%iuu@s(ic8+cqlb4t^17y$bx47)h6v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['prajvalsudhir-facemask.herokuapp.com','127.0.0.1:8000']
 
 
 # Application definition
@@ -121,6 +121,8 @@ USE_TZ = True
 
 STATICFILES_DIRS =[stat_dir,]
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
