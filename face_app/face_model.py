@@ -11,9 +11,13 @@ import math
 from .models import face_photos,predicted_photos
 from .forms import input_form
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR,'face_app/fmask.h5')
+model = load_model(model_path)
 
-model = load_model('C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\fmask.h5')
-haar = cv2.CascadeClassifier('C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\haarcascade_frontalface_default.xml')
+haar_path = os.path.join(BASE_DIR,'face_app/haarcascade_frontalface_default.xml')
+haar = cv2.CascadeClassifier(haar_path)
+#haar = cv2.CascadeClassifier('C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\haarcascade_frontalface_default.xml')
 
 def predict(image_path,output_path,form):
     label_dict = {0: 'Mask', 1: 'No Mask'}
@@ -57,8 +61,11 @@ def predict(image_path,output_path,form):
 
 ### OpenCV Neural network model for improved face detection
 
-prototxt = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\model_data\\deploy.prototxt'
-caffe_model = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\model_data\\weights.caffemodel'
+prototxt = os.path.join(BASE_DIR,'face_app/model_data/deploy.prototxt')
+caffe_model = os.path.join(BASE_DIR,'face_app/model_data/weights.caffemodel')
+
+#prototxt = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\model_data\\deploy.prototxt'
+#caffe_model = 'C:\\Users\\prajv\\Desktop\\PycharmProjects\\PS-PY\\venv\\djenv\\face_pro\\face_app\\model_data\\weights.caffemodel'
 face_detect_model = cv2.dnn.readNetFromCaffe(prototxt,caffe_model)
 
 def predict_v2(image_path,output_path,form):
